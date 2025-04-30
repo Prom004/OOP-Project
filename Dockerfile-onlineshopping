@@ -1,0 +1,9 @@
+FROM openjdk:17-slim
+
+WORKDIR /app
+
+COPY src/AdvancedOnlineShoppingSystem /app/src/AdvancedOnlineShoppingSystem
+
+RUN javac /app/src/AdvancedOnlineShoppingSystem/*.java
+
+CMD ["java", "-cp", "/app/src", "AdvancedOnlineShoppingSystem.OnlineShoppingSystem"]

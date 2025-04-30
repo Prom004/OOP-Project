@@ -1,0 +1,9 @@
+FROM openjdk:17-slim
+
+WORKDIR /app
+
+COPY src/AdvancedStockManagementSystem /app/src/AdvancedStockManagementSystem
+
+RUN javac /app/src/AdvancedStockManagementSystem/*.java
+
+CMD ["java", "-cp", "/app/src", "AdvancedStockManagementSystem.Main"]

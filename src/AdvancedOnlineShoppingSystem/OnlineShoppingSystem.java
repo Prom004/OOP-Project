@@ -13,23 +13,23 @@ public class OnlineShoppingSystem {
     private static String inputValidatedSize(String prompt) {
         while (true) {
             System.out.print(prompt);
-            String size = sc.nextLine().trim().toUpperCase(); // Always capitalize
+            String size = sc.next().trim().toUpperCase();
             if (size.equals("S") || size.equals("M") || size.equals("L") ||
                     size.equals("XL") || size.equals("XXL")) {
                 return size;
             }
-            System.out.println("⚠️ Invalid size. Please enter one of the following: S, M, L, XL, XXL.");
+            System.out.println(" Invalid size. Please enter one of the following: S, M, L, XL, XXL.");
         }
     }
     private static String inputValidatedString(String prompt) {
-        String pattern = "^[A-Za-z\\s\\-\\.]+$"; // Letters, spaces, hyphens, dots
+        String pattern = "^[A-Za-z\\s\\-\\.]+$";
         while (true) {
             System.out.print(prompt);
-            String input = sc.nextLine().trim();
+            String input = sc.next().trim();
             if (!input.isEmpty() && Pattern.matches(pattern, input)) {
                 return input;
             }
-            System.out.println("⚠️ Invalid input. Please enter only letters, spaces, hyphens, or dots.");
+            System.out.println("  Invalid input. Please enter only letters, spaces, hyphens, or dots.");
         }
     }
 
@@ -37,23 +37,23 @@ public class OnlineShoppingSystem {
         String emailPattern = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
         while (true) {
             System.out.print(prompt);
-            String email = sc.nextLine().trim();
+            String email = sc.next().trim();
             if (Pattern.matches(emailPattern, email)) {
                 return email;
             }
-            System.out.println("⚠️ Invalid email format. Please enter a valid email (e.g., abc@example.com).");
+            System.out.println("  Invalid email format. Please enter a valid email (e.g., abc@example.com).");
         }
     }
 
     private static String inputValidatedPhone(String prompt) {
-        String phonePattern = "^[0-9]{8,15}$"; // Accepts 8 to 15 digits
+        String phonePattern = "^[0-9]{8,15}$";
         while (true) {
             System.out.print(prompt);
-            String phone = sc.nextLine().trim();
+            String phone = sc.next().trim();
             if (Pattern.matches(phonePattern, phone)) {
                 return phone;
             }
-            System.out.println("⚠️ Invalid phone number. Enter digits only (8-15 digits).");
+            System.out.println("  Invalid phone number. Enter digits only (8-15 digits).");
         }
     }
 
@@ -65,10 +65,10 @@ public class OnlineShoppingSystem {
                 if (value >= 0) {
                     return value;
                 } else {
-                    System.out.println("⚠️ Please enter a non-negative integer.");
+                    System.out.println("  Please enter a non-negative integer.");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("⚠️ Invalid input. Please enter a valid integer.");
+                System.out.println("  Invalid input. Please enter a valid integer.");
             }
         }
     }
@@ -81,10 +81,10 @@ public class OnlineShoppingSystem {
                 if (value >= 0) {
                     return value;
                 } else {
-                    System.out.println("⚠️ Please enter a non-negative number.");
+                    System.out.println("  Please enter a non-negative number.");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("⚠️ Invalid input. Please enter a valid number.");
+                System.out.println("  Invalid input. Please enter a valid number.");
             }
         }
     }
@@ -120,7 +120,7 @@ public class OnlineShoppingSystem {
             try {
                 choice = Integer.parseInt(sc.nextLine().trim());
             } catch (NumberFormatException e) {
-                System.out.println("⚠️ Invalid choice. Please enter a number between 1-8.");
+                System.out.println("  Invalid choice. Please enter a number between 1-8.");
                 continue;
             }
 
@@ -137,7 +137,7 @@ public class OnlineShoppingSystem {
                     if (eItem.validateItem()) {
                         cart.addItem(eItem);
                     } else {
-                        System.out.println("⚠️ Invalid item details. Item not added.");
+                        System.out.println("  Invalid item details. Item not added.");
                     }
                     break;
 
@@ -153,7 +153,7 @@ public class OnlineShoppingSystem {
                     if (cItem.validateItem()) {
                         cart.addItem(cItem);
                     } else {
-                        System.out.println("⚠️ Invalid item details. Item not added.");
+                        System.out.println("  Invalid item details. Item not added.");
                     }
                     break;
 
@@ -170,7 +170,7 @@ public class OnlineShoppingSystem {
                     if (bItem.validateItem()) {
                         cart.addItem(bItem);
                     } else {
-                        System.out.println("⚠️ Invalid book details. Item not added.");
+                        System.out.println("  Invalid book details. Item not added.");
                     }
                     break;
 
@@ -187,7 +187,7 @@ public class OnlineShoppingSystem {
                     if (aItem.validateItem()) {
                         cart.addItem(aItem);
                     } else {
-                        System.out.println("⚠️ Invalid accessory details. Item not added.");
+                        System.out.println("  Invalid accessory details. Item not added.");
                     }
                     break;
 
@@ -207,7 +207,7 @@ public class OnlineShoppingSystem {
                     if (gItem.validateItem()) {
                         cart.addItem(gItem);
                     } else {
-                        System.out.println("⚠️ Invalid grocery details. Item not added.");
+                        System.out.println("  Invalid grocery details. Item not added.");
                     }
                     break;
 
@@ -217,7 +217,7 @@ public class OnlineShoppingSystem {
 
                 case 7:
                     if (cart.getTotalPrice() == 0) {
-                        System.out.println("⚠️ Cart is empty. Add items first!");
+                        System.out.println("  Cart is empty. Add items first!");
                     } else {
                         System.out.println("\n--- Checkout ---");
                         double amount = inputPositiveDouble("Enter payment amount ($" + cart.getTotalPrice() + "): ");
@@ -227,24 +227,24 @@ public class OnlineShoppingSystem {
                         Payment payment = new Payment("P" + System.currentTimeMillis(), method, amount, transactionDate);
 
                         if (payment.validatePayment(cart.getTotalPrice())) {
-                            System.out.println("✅ Payment Successful!");
+                            System.out.println("Payment Successful!");
                             List<ShoppingCart> completedOrders = new ArrayList<>();
                             completedOrders.add(cart);
                             SalesReport.generateSalesReport(completedOrders);
                             run = false;
                         } else {
-                            System.out.println("⚠️ Payment failed. Try again.");
+                            System.out.println("  Payment failed. Try again.");
                         }
                     }
                     break;
 
                 case 8:
-                    System.out.println("👋 Exiting the system. Thank you!");
+                    System.out.println(" Exiting the system. Thank you!");
                     run = false;
                     break;
 
                 default:
-                    System.out.println("⚠️ Invalid choice. Please select between 1 and 8.");
+                    System.out.println("  Invalid choice. Please select between 1 and 8.");
             }
         }
 

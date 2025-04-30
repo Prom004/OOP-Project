@@ -91,7 +91,7 @@ public class Main {
                     String name = inputString("Item Name: ");
                     int qty = inputPositiveInt("Quantity: ");
                     double price = inputPositiveDouble("Price per unit: ");
-                    Date expiry = new Date(System.currentTimeMillis() + 5 * 86400000L); // 5 days ahead
+                    Date expiry = new Date(System.currentTimeMillis() + 5 * 86400000L);
                     GroceryItem gi = new GroceryItem("G01", name, qty, price, "GroceryPro", expiry);
                     if (gi.validateStock()) stockItems.add(gi);
                     else System.out.println("Invalid item or expired date. Not added.");
